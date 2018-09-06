@@ -1,0 +1,176 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>searchKPI</title>
+	<script src="js/jquery.min.js" type="text/javascript"></script>
+</head>
+<link rel="stylesheet" type="text/css" href="css/searchKPI.css">
+<link rel="stylesheet" href="css/reset.css"/>
+<link rel="stylesheet" href="css/BeatPicker.min.css"/>
+<link rel="stylesheet" href="css/demos.css"/>
+<link rel="stylesheet" href="css/prism.css"/>
+<script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+<script src="js/BeatPicker.min.js"></script>
+<script src="js/prism.js"></script>
+<script type="text/javascript" src="js/searchKPI.js"></script>
+<script>
+	
+	$(function(){
+		var timer = function(){};
+
+		$(".nav>li").hover(function(){
+			clearTimeout(timer);
+			$(this).children('ul').stop(true,true).show();
+		},function(){
+			var self = $(this);
+			timer = setTimeout(function(){
+				self.children('ul').stop(true,true).hide();	
+			}, 100);
+		});
+	});
+</script>
+<body>
+	
+	<div id="content">
+
+
+		<!--DEMO start-->
+		<div class="menu">
+			<div class="logo">
+				TD-LTE
+			</div>
+			<ul class="nav">
+
+
+				<li><a href="User.html">数据管理</a>
+					<ul class="sub-nav">
+						<li><a href="uploadtbCell.html">数据导入</a></li>
+						<li><a href="download.html">数据导出</a></li>
+
+					</ul>
+				</li>
+				<li><a href="User.html">数据查询</a>
+					<ul class="sub-nav">
+						<li><a href="searchCell.html">小区配置信息查询</a></li>
+						<li><a href="searchEnodeb.html">基站eNodeB查询</a></li>
+						<li><a href="searchKPI.html">KPI指标查询</a></li>
+						<li><a href="searchPRB.html">PRB信息查询</a></li>
+
+					</ul>
+				</li>
+				<li><a href="User.html">数据分析</a>
+					<ul class="sub-nav">
+						<li><a href="analyC2I.html">主邻小区C2I干扰分析</a></li>
+						<li><a href="analy3cell.html">查询重叠覆盖干扰三元组</a></li>
+
+					</ul>
+				</li>
+			</ul>
+			<div id="out">	
+				<a href="first.html" >Log Out</a>
+			</div>
+		</div>
+	</div>
+
+
+	<!--DEMO end-->
+	<div class="info">
+		<div class="title">
+			<h2>KPI指标信息查询</h2>
+		</div>
+		<div class="choose">
+			<div id="chooseName">
+				<label>请选择网元名称：</label> 
+				<input type="text" id="txt_name" list="name" /> 
+				<datalist id="name"> 
+					<option value="时代峰峻" /> 
+					<option value="南滨路" /> 
+					<option value="深度发觉" /> 
+				</datalist>
+
+			</div>
+			<br>
+			<div id="chooseAttr">
+				<label>请选择属性：</label> 
+				<input type="text" id="txt_attr" list="attr" /> 
+				<datalist id="attr"> 
+					<option value="小区信息" /> 
+					<option value="小区名称" /> 
+					<option value="RRC连接建立完成次数（无）" /> 
+					<option value="RRC连接建立完成次数（包括重发）" /> 
+					<option value="RRC建立成功率qf(%)" />
+					<option value="E-RAB建立成功总次数 (无)" />  <option value="E-RAB建立尝试总次数 (无)" />
+					<option value="E-RAB建立成功率2(%)" />
+					<option value="eNodeB触发的E-RAB异常释放总次数 (无)" />
+					<option value="小区切换出E-RAB异常释放总次数 (无)" />
+					<option value="E-RAB掉线率(新)（%）" />
+					<option value="无线接通率ay（%）" />
+					<option value="eNodeB发起的S1 RESET导致的UE Context释放次数 (无)" />
+					<option value="UE Context异常释放次数 (无)" />
+					<option value="UE Context建立成功总次数 (无)" />
+					<option value="无线掉线率（%）" />
+					<option value="eNodeB内异频切换出成功次数 (无)" />
+					<option value="eNodeB内异频切换出尝试次数 (无)" />
+					<option value="eNodeB内同频切换出成功次数 (无)" />
+					<option value="eNodeB内异频切换出尝试次数 (无)" />
+					<option value="eNodeB间异频切换出成功次数 (无)" />
+					<option value="eNodeB间异频切换出尝试次数 (无)" />
+					<option value="eNodeB间同频切换出成功次数 (无)" />
+					<option value="eNodeB间同频切换出尝试次数 (无)" />
+					<option value="eNB内切换成功率（%）" />
+					<option value="eNB间切换成功率（%）" />
+					<option value="同频切换成功率zsp（%）" />
+					<option value="异频切换成功率zsp（%）" />
+					<option value="切换成功率（%）" />
+					<option value="小区PDCP层所接收到的上行数据的总吞吐量 (比特)" />
+					<option value="小区PDCP层所发送到的下行数据的总吞吐量 (比特)" />
+					<option value="RRC重建请求次数（无）" />
+					<option value="RRC连接重建比率（%）" />
+					<option value="通过重建回源小区的eNodeB间同频切换出执行成功次数 (无)" />
+					<option value="通过重建回源小区的eNodeB间异频切换出执行成功次数 (无)" />
+					<option value="通过重建回源小区的eNodeB内同频切换出执行成功次数 (无)" />
+					<option value="通过重建回源小区的eNodeB内异频切换出执行成功次数 (无)" />
+					<option value="eNB内切换出成功次数（次）" />
+					<option value="eNB内切换出请求次数（次）" />
+
+				</datalist>
+
+			</div>
+			<div class="time">
+				<!--	<div id="simple" class="demo">-->
+
+					<div class="sample">
+
+						<label class="tips"> StartTime:</label>
+						<input type="text" data-beatpicker="true" id="startTime"/>
+						<br>
+
+						<label class="tips">EndTime:</label>  
+						<input type="text" data-beatpicker="true" id="endTime"/>
+						
+					</div>
+					<!--</div>-->
+				</div>
+				<input type="submit" name="submit" id="submitInfo" onclick="getInfo()">
+			</div>
+
+			<div class="pic">
+				<div id="main" style="height:10px;width: 10px"></div>
+				<!--ECharts单文件引入 -->
+				<script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+				<script type="text/javascript" src="js/searchKPI.js"></script>
+
+
+				<!---------------------------------------------------------- 折线图----------------------------------------------------->
+				<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+				<div id="main2" style="height:400px;width: 700px"></div>
+				<!-- ECharts单文件引入 -->
+				<script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+			</div>
+
+		</div>
+
+
+	</body>
+	</html>

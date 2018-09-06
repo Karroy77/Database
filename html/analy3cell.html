@@ -1,0 +1,200 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>analy3cell</title>
+	<script src="js/jquery.min.js" type="text/javascript"></script>
+</head>
+<link rel="stylesheet" type="text/css" href="css/analy3cell.css">
+<script type="text/javascript" src="js/analy3cell.js"></script>
+
+<script>
+
+	$(function(){
+		var timer = function(){};
+
+		$(".nav>li").hover(function(){
+			clearTimeout(timer);
+			$(this).children('ul').stop(true,true).show();
+		},function(){
+			var self = $(this);
+			timer = setTimeout(function(){
+				self.children('ul').stop(true,true).hide();	
+			}, 100);
+		});
+	});
+</script>
+<body>
+	
+	<div id="content">
+
+
+		<!--DEMO start-->
+		<div class="menu">
+			<div class="logo">
+				TD-LTE
+			</div>
+			<ul class="nav">
+
+
+				<li><a href="User.html">数据管理</a>
+					<ul class="sub-nav">
+						<li><a href="uploadtbCell.html">数据导入</a></li>
+						<li><a href="download.html">数据导出</a></li>
+
+					</ul>
+				</li>
+				<li><a href="User.html">数据查询</a>
+					<ul class="sub-nav">
+						<li><a href="searchCell.html">小区配置信息查询</a></li>
+						<li><a href="searchEnodeb.html">基站eNodeB查询</a></li>
+						<li><a href="searchKPI.html">KPI指标查询</a></li>
+						<li><a href="searchPRB.html">PRB信息查询</a></li>
+
+					</ul>
+				</li>
+				<li><a href="User.html">数据分析</a>
+					<ul class="sub-nav">
+						<li><a href="analyC2I.html">主邻小区C2I干扰分析</a></li>
+						<li><a href="analy3cell.html">查询重叠覆盖干扰三元组</a></li>
+
+					</ul>
+				</li>
+			</ul>
+			<div id="out">	
+				<a href="first.html" >Log Out</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="info">
+		<h3>
+			查询重叠覆盖干扰三元组
+		</h3>
+		<div class="inputX">
+			<label>请输入参数X </label><input type="text" name="x" id="paraX">
+			<input type="submit" name="okX" id="okX" value="确认" onclick="getX()">
+		</div>
+		<div class="preview">
+			
+			<div class="box">
+				<div>
+					<button type="button" id="excelBtn">导出Excel</button>
+
+				</div>
+				<a href="#" onclick="insertRow()"> insert</a>
+				<div id="myDiv">
+					<table id="tableExcel"  border="1" >
+						<!-- caption元素可以生成表标题，其单元格列跨度为表格的列数 -->
+						<caption id="cap">tbC2I3</caption>
+						<tr>
+							<!-- 可以使用rowspan和colspan来合并单元格 -->
+							<th rowspan="1">a小区ID</th>
+							<th rowspan="1">b小区ID</th>
+							<th rowspan="1">c小区ID</th>
+							
+						</tr>
+						<tr>
+							<td>123</td>
+							<td>345</td>
+							<td>567</td>
+							
+						</tr>
+						
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!--DEMO end-->
+
+
+
+
+</body>
+
+<script>
+	document.getElementById('excelBtn').onclick = () => {
+		exportExcel.exports(tableExcel);
+	};
+	class ExportExcel {
+		constructor() {
+			this.idTmr = null;
+			this.uri = 'data:application/vnd.ms-excel;base64,';
+			this.template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="UTF-8"><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>';      
+		}
+		getBrowser() {
+			var explorer = window.navigator.userAgent;
+            //ie
+            if (explorer.indexOf("MSIE") >= 0) {
+            	return 'ie';
+            }
+            //firefox
+            else if (explorer.indexOf("Firefox") >= 0) {
+            	return 'Firefox';
+            }
+            //Chrome
+            else if (explorer.indexOf("Chrome") >= 0) {
+            	return 'Chrome';
+            }
+            //Opera
+            else if (explorer.indexOf("Opera") >= 0) {
+            	return 'Opera';
+            }
+            //Safari
+            else if (explorer.indexOf("Safari") >= 0) {
+            	return 'Safari';
+            }
+        };
+        exports(tableid) {
+        	if (this.getBrowser() == 'ie') {
+        		var curTbl = document.getElementById(tableid);
+        		var oXL = new ActiveXObject("Excel.Application");
+        		var oWB = oXL.Workbooks.Add();
+        		var xlsheet = oWB.Worksheets(1);
+        		var sel = document.body.createTextRange();
+        		sel.moveToElementText(curTbl);
+        		sel.select();
+        		sel.execCommand("Copy");
+        		xlsheet.Paste();
+        		oXL.Visible = true;
+
+        		try {
+        			var fname = oXL.Application.GetSaveAsFilename("Excel.xls", "Excel Spreadsheets (*.xls), *.xls");
+        		} catch (e) {
+        			alert(e);
+        		} finally {
+        			oWB.SaveAs(fname);
+        			oWB.Close(savechanges = false);
+        			oXL.Quit();
+        			oXL = null;
+        			this.idTmr = window.setInterval("Cleanup();", 1);
+        		}
+        	} else {
+        		this.openExport(tableid)
+        	}
+        };
+        openExport(table, name) {
+        	if (!table.nodeType) {
+        		table = document.getElementById(table)
+        	}
+        	var ctx = {
+        		worksheet: name || 'Worksheet',
+        		table: table.innerHTML
+        	};
+        	window.location.href = this.uri + this.base64(this.format(this.template, ctx));
+        };
+        base64(s) {
+        	return window.btoa(unescape(encodeURIComponent(s)))
+        };
+        format(s, c) {
+        	return s.replace(/{(\w+)}/g, function (m, p) {
+        		return c[p];
+        	});
+        };
+    }
+    var exportExcel = new ExportExcel();
+</script>
+
+</html>

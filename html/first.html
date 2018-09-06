@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		TD-LTE
+	</title>
+	<link rel="stylesheet" type="text/css" href="css/first.css">
+</head>
+<body>
+	<div id="title">
+		<div id="logo">
+			<h4>TD-LTE</h4>
+		</div>
+		<!--<div id="out">	
+			<a href="#" >Log Out</a>
+		</div>-->
+	</div>
+	<div id="imgon">
+	</div>
+	<div id="logimg">
+	</div>
+	<div class="intro">
+		<h1> Welcome to TD-LTE System!</h1>
+		<p>
+			Group Members: Jiaxin Liu/Shijie Wan/Ye Li
+		</p>
+	</div>
+	<div class="buttons">
+		
+		<input type="submit" name="login" id="login" value="Login"  onclick="showLogDialog()" >
+		
+		<input type="submit" name="register" id="register" value="Register" onclick="showRegDialog()" >
+		
+	</div>
+
+	<div class="loginBox" id="loginBox">
+		<h3>Login</h3>
+		<input type="text" name="Logusername" id="LogUserName" placeholder="Username">
+		<input type="password" name="Logpassword" id="LogPassword" placeholder="Password">
+		<input type="submit" name="loginSub" value="登录"  onclick="submitLogin()">
+		
+		<a href="#" id="close" onclick="closeLogDialog()">X</a>
+	</div>
+
+	<div class="RegisterBox" id="RegisterBox">
+		<h3>Register</h3>
+		<input type="text" name="Regusername" id="RegUsername" placeholder="Username">
+		<input type="password" name="Regpassword" id="RegPassword" placeholder="Password">
+		<div class="choose">
+			<input id="vip" type="radio" checked="checked" name="1"  value="VIP" />VIP  
+			<input id="ord" type="radio"  name="1" value="Ord" />Ordinary
+		</div>
+		<input type="submit" name="RegSub" value="注册" onclick="submitRegist()">
+
+		
+		
+		<a href="#" id="close" onclick="closeRegDialog()">X</a>
+	</div>
+
+</body>
+<script type="text/javascript" src="js/first.js">
+	
+</script>
+</html>

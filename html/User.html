@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Welcome</title>
+	<script src="js/jquery.min.js" type="text/javascript"></script>
+</head>
+<link rel="stylesheet" type="text/css" href="css/User1.css">
+
+<script>
+	/*$(function(){
+		$(".nav>li").hover(function(){
+			$(this).children('ul').stop(true,true).show('slow');
+		},function(){
+			$(this).children('ul').stop(true,true).hide('slow');
+		})
+	})*/
+/*
+	$(function(){
+		$(".nav>li").hover(function(){
+			$(this).children('ul').stop(true,true).show(300);
+		},function(){
+			$(this).children('ul').stop(true,true).hide(300);
+		})
+	})*/
+
+	$(function(){
+		var timer = function(){};
+
+		$(".nav>li").hover(function(){
+			clearTimeout(timer);
+			$(this).children('ul').stop(true,true).show();
+		},function(){
+			var self = $(this);
+			timer = setTimeout(function(){
+				self.children('ul').stop(true,true).hide();	
+			}, 100);
+		});
+	});
+</script>
+<body>
+	
+	<div id="content">
+
+
+		<!--DEMO start-->
+		<div class="menu">
+			<div class="logo">
+				TD-LTE
+			</div>
+			<ul class="nav">
+
+
+				<li><a href="User.html">数据管理</a>
+					<ul class="sub-nav">
+						<li><a href="uploadtbCell.html">数据导入</a></li>
+						<li><a href="download.html">数据导出</a></li>
+
+					</ul>
+				</li>
+				<li><a href="User.html">数据查询</a>
+					<ul class="sub-nav">
+						<li><a href="searchCell.html">小区配置信息查询</a></li>
+						<li><a href="searchEnodeb.html">基站eNodeB查询</a></li>
+						<li><a href="searchKPI.html">KPI指标查询</a></li>
+						<li><a href="searchPRB.html">PRB信息查询</a></li>
+
+					</ul>
+				</li>
+				<li><a href="User.html">数据分析</a>
+					<ul class="sub-nav">
+						<li><a href="analyC2I.html">主邻小区C2I干扰分析</a></li>
+						<li><a href="analy3cell.html">查询重叠覆盖干扰三元组</a></li>
+
+					</ul>
+				</li>
+			</ul>
+			<div id="out">	
+				<a href="first.html" >Log Out</a>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="info">
+		<h2>欢迎使用TD-LTE系统</h2>
+		<h3>请从页面顶端菜单选择您需要执行的功能</h3>
+	</div>
+
+	<!--DEMO end-->
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+
+</body>
+</html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>SearchCell</title>
+	<script src="js/jquery.min.js" type="text/javascript"></script>
+
+</head>
+<link rel="stylesheet" type="text/css" href="css/searchCell.css">
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<!--<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">-->
+<script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/searchCell.js"></script>
+
+<script>
+
+	$(function(){
+		var timer = function(){};
+
+		$(".nav>li").hover(function(){
+			clearTimeout(timer);
+			$(this).children('ul').stop(true,true).show();
+		},function(){
+			var self = $(this);
+			timer = setTimeout(function(){
+				self.children('ul').stop(true,true).hide();	
+			}, 100);
+		});
+	});
+</script>
+<body>
+	
+	<div id="content">
+
+
+		<!--DEMO start-->
+		<div class="menu">
+			<div class="logo">
+				TD-LTE
+			</div>
+			<ul class="nav">
+
+
+				<li><a href="User.html">数据管理</a>
+					<ul class="sub-nav">
+						<li><a href="uploadtbCell.html">数据导入</a></li>
+						<li><a href="download.html">数据导出</a></li>
+
+					</ul>
+				</li>
+				<li><a href="User.html">数据查询</a>
+					<ul class="sub-nav">
+						<li><a href="searchCell.html">小区配置信息查询</a></li>
+						<li><a href="searchEnodeb.html">基站eNodeB查询</a></li>
+						<li><a href="searchKPI.html">KPI指标查询</a></li>
+						<li><a href="searchPRB.html">PRB信息查询</a></li>
+
+					</ul>
+				</li>
+				<li><a href="User.html">数据分析</a>
+					<ul class="sub-nav">
+						<li><a href="analyC2I.html">主邻小区C2I干扰分析</a></li>
+						<li><a href="analy3cell.html">查询重叠覆盖干扰三元组</a></li>
+
+					</ul>
+				</li>
+			</ul>
+			<div id="out">	
+				<a href="first.html" >Log Out</a>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="info">
+
+		<div class="fileTitle">
+			<h3>小区配置信息查询</h3>
+		</div>
+		<!--DEMO end-->
+		<div class="container-fluid">
+			<div class="row-fluid">
+
+				<div class="tabbable" id="tabs-803525">
+					<ul class="nav nav-tabs">
+						<li  class="active">
+							<a href="#panel-588620" data-toggle="tab">按CellID</a>
+						</li>
+						<li >
+							<a href="#panel-854147" data-toggle="tab">按CellName</a>
+						</li>
+					</ul>
+					<div class="tab-content">
+						<div class="tab-pane active" id="panel-588620">
+							<div class="chooseTable">
+
+								<label>请选择CellID：</label> 
+								<input type="text" id="txt_id" list="ide" /> 
+								<datalist id="ide"> 
+									<option value="12345" /> 
+									<option value="23456" /> 
+									<option value="45678" /> 
+								</datalist>
+								<br>
+								<input type="submit" name="searchID" id="searchID" value="查询" onclick="getTablebyID()">
+								<!--
+									<button name="searchID" id="searchID" value="查询"></button>-->
+								</div>	
+
+							</div>
+							<div class="tab-pane" id="panel-854147">
+								<p>
+									<div class="chooseTable">
+
+										<label>请选择CellName：</label> 
+										<input type="text" id="txt_name" list="name" /> 
+										<datalist id="name"> 
+											<option value="时代峰峻" /> 
+											<option value="南滨路" /> 
+											<option value="深度发觉" /> 
+										</datalist>
+										<br>
+										<input type="submit" name="searchName" id="searchName" value="查询" onclick="getTablebyName()">
+									</div>	
+								</p>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+
+			<div class="preview">
+
+
+				<div class="box">
+					<div>
+						<button type="button" id="excelBtn">导出Excel</button>
+
+					</div>
+					<a href="#" onclick="insertRow()"> insert</a>
+					<div id="myDiv">
+						<table id="tableExcel"  border="1" >
+							<!-- caption元素可以生成表标题，其单元格列跨度为表格的列数 -->
+							<caption id="tableTitle">tbCell</caption>
+							<tr>
+								　　　　　　<th  id="CITY">CITY</th>
+								　　　　　　<th  id="SECTOR_ID">SECTOR_ID</th>
+								　　　　　　<th  id="SECTOR_NAME">SECTOR_NAME</th>
+								　　　　　　<th  id="ENODEBID">ENODEBID</th>
+								　　　　　　<th  id="ENODEB_NAME">ENODEB_NAME</th>
+								　　　　　　<th  id="EARFCN">EARFCN</th>
+								<th  id="PCI">PCI</th>
+								<th  id="PSS">PSS</th>
+								<th  id="TAC">TAC</th>
+								<th  id="VENDOR">VENDOR</th>
+								<th  id="LONGITUDE">LONGITUDE</th>
+								<th  id="LATITUDE">LATITUDE</th>
+								<th  id="STYLE">STYLE</th>
+								<th  id="AZIMUTH">AZIMUTH</th>
+								<th  id="HEIGHT">HEIGHT</th>
+								<th  id="ELECTTILT">ELECTTILT</th>
+								<th  id="MECHTILT">MECHTILT</th>
+								<th  id="TOTLETILT">TOTLETILT</th>
+
+
+							</tr>
+
+							<tr>
+								<td>123</td>
+								<td>345</td>
+								<td>567</td>
+
+							</tr>
+
+						</table>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+
+
+	</body>
+
+
+	<script>
+		document.getElementById('excelBtn').onclick = () => {
+			exportExcel.exports(tableExcel);
+		};
+		class ExportExcel {
+			constructor() {
+				this.idTmr = null;
+				this.uri = 'data:application/vnd.ms-excel;base64,';
+				this.template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="UTF-8"><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--></head><body><table>{table}</table></body></html>';      
+			}
+			getBrowser() {
+				var explorer = window.navigator.userAgent;
+            //ie
+            if (explorer.indexOf("MSIE") >= 0) {
+            	return 'ie';
+            }
+            //firefox
+            else if (explorer.indexOf("Firefox") >= 0) {
+            	return 'Firefox';
+            }
+            //Chrome
+            else if (explorer.indexOf("Chrome") >= 0) {
+            	return 'Chrome';
+            }
+            //Opera
+            else if (explorer.indexOf("Opera") >= 0) {
+            	return 'Opera';
+            }
+            //Safari
+            else if (explorer.indexOf("Safari") >= 0) {
+            	return 'Safari';
+            }
+        };
+        exports(tableid) {
+        	if (this.getBrowser() == 'ie') {
+        		var curTbl = document.getElementById(tableid);
+        		var oXL = new ActiveXObject("Excel.Application");
+        		var oWB = oXL.Workbooks.Add();
+        		var xlsheet = oWB.Worksheets(1);
+        		var sel = document.body.createTextRange();
+        		sel.moveToElementText(curTbl);
+        		sel.select();
+        		sel.execCommand("Copy");
+        		xlsheet.Paste();
+        		oXL.Visible = true;
+
+        		try {
+        			var fname = oXL.Application.GetSaveAsFilename("Excel.xls", "Excel Spreadsheets (*.xls), *.xls");
+        		} catch (e) {
+        			alert(e);
+        		} finally {
+        			oWB.SaveAs(fname);
+        			oWB.Close(savechanges = false);
+        			oXL.Quit();
+        			oXL = null;
+        			this.idTmr = window.setInterval("Cleanup();", 1);
+        		}
+        	} else {
+        		this.openExport(tableid)
+        	}
+        };
+        openExport(table, name) {
+        	if (!table.nodeType) {
+        		table = document.getElementById(table)
+        	}
+        	var ctx = {
+        		worksheet: name || 'Worksheet',
+        		table: table.innerHTML
+        	};
+        	window.location.href = this.uri + this.base64(this.format(this.template, ctx));
+        };
+        base64(s) {
+        	return window.btoa(unescape(encodeURIComponent(s)))
+        };
+        format(s, c) {
+        	return s.replace(/{(\w+)}/g, function (m, p) {
+        		return c[p];
+        	});
+        };
+    }
+    var exportExcel = new ExportExcel();
+</script>
+
+</html>
