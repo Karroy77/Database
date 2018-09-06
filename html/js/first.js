@@ -46,3 +46,14 @@ function submitRegist(){
     }
   }
 }
+
+
+{% if logResult == false %}
+    alert("用户名或密码错误！")
+{% endif %}
+
+{% if regResult == false %}
+    alert("用户名已重复，请更换用户名或直接登录！")
+{% else%}
+    alert("注册成功，快去登录吧！")
+{% endif %}
