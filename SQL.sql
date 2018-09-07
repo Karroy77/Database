@@ -9,13 +9,13 @@ ON PRIMARY
 FILEGROUP TD_LTE_FG1
   (NAME = 'TD-LTE_FG1_Dat1',
     FILENAME =
-       'D:\SQL server\½Å±¾\data\TD-LTE_FG1_1.ndf ',
+       'D:\SQL server\è„šæœ¬\data\TD-LTE_FG1_1.ndf ',
     SIZE = 30MB,
     MAXSIZE=50MB,
     FILEGROWTH=1MB),
   ( NAME = 'TD-LTE_FG1_Dat2',
     FILENAME =
-	   'D:\SQL server\½Å±¾\data\TD-LTE_FG1_2.ndf ',
+	   'D:\SQL server\è„šæœ¬\data\TD-LTE_FG1_2.ndf ',
     SIZE = 30MB,
     MAXSIZE=50MB,
     FILEGROWTH=1MB)
@@ -51,13 +51,13 @@ go
 	ENODEBID int not null,
 	ENODEB_NAME nvarchar(255) not null,
 	VENDOR nvarchar(255) null
-	constraint VENDOR_tbCell check(VENDOR is null or (VENDOR in('»ªÎª','ÖĞĞË','ÅµÎ÷','°®Á¢ĞÅ','±´¶û','´óÌÆ'))),
+	constraint VENDOR_tbCell check(VENDOR is null or (VENDOR in('åä¸º','ä¸­å…´','è¯ºè¥¿','çˆ±ç«‹ä¿¡','è´å°”','å¤§å”'))),
 	LONGITUDE float not null
 	constraint LONGITUDE_tbCell check (LONGITUDE between -180.00000 and 180.00000),
 	LATITUDE float not null
 	constraint LATITUDE_tbCell check (LATITUDE between -90.00000 and 90.00000),
 	style nvarchar(255) null
-	constraint STYLE_tbCell check (STYLE is null or (STYLE in ('ºêÕ¾','ÊÒÄÚ','ÊÒÍâ','ÊÒ·Ö'))),
+	constraint STYLE_tbCell check (STYLE is null or (STYLE in ('å®ç«™','å®¤å†…','å®¤å¤–','å®¤åˆ†'))),
 	primary key(SECTOR_ID)
 )
 CREATE NONCLUSTERED INDEX IX_tbCell ON tbCell (SECTOR_NAME)
@@ -67,7 +67,7 @@ create table tbOptCell(
 	EARFCN int null
 	constraint EARFCN_tbOptCell check (EARFCN in (38350,38400,38098,38100,37900,37902,40936,40938,40940,38950,39052,39148,39250,38496,38544)),
 	CELL_TYPE nvarchar(50) null
-	constraint CELL_TYPE_tbOptCell check (CELL_TYPE is null or (CELL_TYPE in ('ÓÅ»¯Çø','±£»¤´ø'))),
+	constraint CELL_TYPE_tbOptCell check (CELL_TYPE is null or (CELL_TYPE in ('ä¼˜åŒ–åŒº','ä¿æŠ¤å¸¦'))),
 	primary key(SECTOR_ID)
 )
 
@@ -101,7 +101,7 @@ create table tbPCIAssignment(
 	LONGITUDE float null,
 	LATITUDE float null,
 	style varchar(50)null
-	constraint STYLE_tbPCIAssignment check (STYLE is null or (STYLE in ('ºêÕ¾','ÊÒÄÚ','ÊÒÍâ'))),
+	constraint STYLE_tbPCIAssignment check (STYLE is null or (STYLE in ('å®ç«™','å®¤å†…','å®¤å¤–'))),
 	OPT_DATETIME datetime null default getdate(),
 	primary key(ASSIGN_ID,SECTOR_ID)
 
@@ -206,7 +206,6 @@ create table tbHandOver(
 )
 
 create table tbKPI(
-	--	eNodeBÄÚÒìÆµÇĞ»»³ö³É¹¦´ÎÊı (ÎŞ)	eNodeBÄÚÒìÆµÇĞ»»³ö³¢ÊÔ´ÎÊı (ÎŞ)	eNodeBÄÚÍ¬ÆµÇĞ»»³ö³É¹¦´ÎÊı (ÎŞ)	eNodeBÄÚÍ¬ÆµÇĞ»»³ö³¢ÊÔ´ÎÊı (ÎŞ)	eNodeB¼äÒìÆµÇĞ»»³ö³É¹¦´ÎÊı (ÎŞ)	eNodeB¼äÒìÆµÇĞ»»³ö³¢ÊÔ´ÎÊı (ÎŞ)	eNodeB¼äÍ¬ÆµÇĞ»»³ö³É¹¦´ÎÊı (ÎŞ)	eNodeB¼äÍ¬ÆµÇĞ»»³ö³¢ÊÔ´ÎÊı (ÎŞ)	eNBÄÚÇĞ»»³É¹¦ÂÊ (%)	eNB¼äÇĞ»»³É¹¦ÂÊ (%)	Í¬ÆµÇĞ»»³É¹¦ÂÊzsp (%)	ÒìÆµÇĞ»»³É¹¦ÂÊzsp (%)	ÇĞ»»³É¹¦ÂÊ (%)	Ğ¡ÇøPDCP²ãËù½ÓÊÕµ½µÄÉÏĞĞÊı¾İµÄ×ÜÍÌÍÂÁ¿ (±ÈÌØ)	Ğ¡ÇøPDCP²ãËù·¢ËÍµÄÏÂĞĞÊı¾İµÄ×ÜÍÌÍÂÁ¿ (±ÈÌØ)	RRCÖØ½¨ÇëÇó´ÎÊı (ÎŞ)	RRCÁ¬½ÓÖØ½¨±ÈÂÊ (%)	Í¨¹ıÖØ½¨»ØÔ´Ğ¡ÇøµÄeNodeB¼äÍ¬ÆµÇĞ»»³öÖ´ĞĞ³É¹¦´ÎÊı (ÎŞ)	Í¨¹ıÖØ½¨»ØÔ´Ğ¡ÇøµÄeNodeB¼äÒìÆµÇĞ»»³öÖ´ĞĞ³É¹¦´ÎÊı (ÎŞ)	Í¨¹ıÖØ½¨»ØÔ´Ğ¡ÇøµÄeNodeBÄÚÍ¬ÆµÇĞ»»³öÖ´ĞĞ³É¹¦´ÎÊı (ÎŞ)	Í¨¹ıÖØ½¨»ØÔ´Ğ¡ÇøµÄeNodeBÄÚÒìÆµÇĞ»»³öÖ´ĞĞ³É¹¦´ÎÊı (ÎŞ)	eNBÄÚÇĞ»»³ö³É¹¦´ÎÊı (´Î)	eNBÄÚÇĞ»»³öÇëÇó´ÎÊı (´Î)
 	startTime date not null,
 	turnround int,
 	name nvarchar(50),
@@ -248,7 +247,7 @@ create table tbKPI(
 	am_ int,
 	an_ int,
 	ao_ int,
-	ap_ int£¬
+	ap_ intï¼Œ
 	primary key(startTime,cell_multi)
 )
 CREATE NONCLUSTERED INDEX IX_tbKPI ON tbKPI (name,starttime)
@@ -474,8 +473,8 @@ create table tbPRBNew(
 create table userlist(
 	username nvarchar(50),
 	password nvarchar(50), 
-	type int,  --1ÊÇvip£¬0ÊÇÆÕÍ¨ÓÃ»§
-	state int,  --1±íÊ¾ÔÚÏß£¬0±íÊ¾ÏÂÏß
+	type int,  --1æ˜¯vipï¼Œ0æ˜¯æ™®é€šç”¨æˆ·
+	state int,  --1è¡¨ç¤ºåœ¨çº¿ï¼Œ0è¡¨ç¤ºä¸‹çº¿
 	primary key(username)
 )
 
@@ -484,19 +483,19 @@ create table tbC2I3(
 	B_sector_id nvarchar(50),
 	C_sector_id nvarchar(50)
 )
-CREATE NONCLUSTERED INDEX IX_tbAdjCell ON tbAdjCell (S_EARFCN)--´´½¨·Ç¾Û¼¯Ë÷Òı
+CREATE NONCLUSTERED INDEX IX_tbAdjCell ON tbAdjCell (S_EARFCN)--åˆ›å»ºéèšé›†ç´¢å¼•
 go
 */
 
-/*--×¢²á£º
+/*--æ³¨å†Œï¼š
 insert into userlist(username,password,type,state)values('xxx','xx',1,0)
 
---µÇÂ¼²éÑ¯£º
+--ç™»å½•æŸ¥è¯¢ï¼š
 select username from userlist where username='xxx' and password='xxx'*/
 
---µ¼Èë
+--å¯¼å…¥
 /*bulk insert tbCell
-from 'D:\Êı¾İ¿â\Êı¾İ¿âÏµÍ³Ô­Àí¿Î³ÌÉè¼Æ-18\ÈıÃÅÏ¿µØÇøTD-LTEÍøÂçÊı¾İ-2017-03\1.tbCell.xlsx'
+from 'D:\æ•°æ®åº“\æ•°æ®åº“ç³»ç»ŸåŸç†è¯¾ç¨‹è®¾è®¡-18\ä¸‰é—¨å³¡åœ°åŒºTD-LTEç½‘ç»œæ•°æ®-2017-03\1.tbCell.xlsx'
 with
 (	
 	FIELDTERMINATOR = ' ',
@@ -508,7 +507,7 @@ with
 );*/
 
 
---¿ªÆôxp_cmdshell
+--å¼€å¯xp_cmdshell
 /*EXEC sp_configure 'show advanced options', 1
 GO
 RECONFIGURE
@@ -518,8 +517,8 @@ GO
 RECONFIGURE
 GO*/
 
---µ¼³öÊı¾İ±í
---µ¼³ötbOptCell
+--å¯¼å‡ºæ•°æ®è¡¨
+--å¯¼å‡ºtbOptCell
 /*if exists(select * from TD_LTE..sysobjects where id = object_id('TD_LTE..TempTable1'))
 drop table TD_LTE..TempTable1
 go
@@ -528,9 +527,9 @@ select 'SECTOR_ID'as [1],'EARFCN' as [2],'CELL_TYPE' as [3]
 union all
 select SECTOR_ID, convert(nvarchar(50),EARFCN),CELL_TYPE from tbOptcell )as temptable1
 EXEC master..xp_cmdshell 'BCP "SELECT  * FROM TD_LTE..temptable1" queryout "E:\sql-log\data\test1.xls" -c -q -S"DESKTOP-5M6JKFJ" -U"sa" -P"ly520741"'
-drop table TD_LTE..TempTable1  --É¾³ıÁÙÊ±±í*/
+drop table TD_LTE..TempTable1  --åˆ é™¤ä¸´æ—¶è¡¨*/
 
---µ¼³ötbAdjCell
+--å¯¼å‡ºtbAdjCell
 /*if exists(select * from TD_LTE..sysobjects where id = object_id('TD_LTE..TempTable2'))
 drop table TD_LTE..TempTable2
 go
@@ -539,9 +538,9 @@ select 'S_SECTOR_ID'as [1],'N_SECTOR_ID'as [2],'S_EARFCN	' as [3],'N_EARFCN' as 
 union all
 select convert(char(15),S_SECTOR_ID),convert(char(15),N_SECTOR_ID), convert(char(15),S_EARFCN),  convert(char(15),N_EARFCN)from tbAdjcell )as temptable2
 EXEC master..xp_cmdshell 'BCP "SELECT  * FROM TD_LTE..temptable2" queryout "E:\sql-log\data\test2.txt" -c -q -S"DESKTOP-5M6JKFJ" -U"sa" -P"ly520741"'
-drop table TD_LTE..TempTable2  --É¾³ıÁÙÊ±±í*/
+drop table TD_LTE..TempTable2  --åˆ é™¤ä¸´æ—¶è¡¨*/
 
---µ¼³ötbATUHandOver
+--å¯¼å‡ºtbATUHandOver
 /*if exists(select * from TD_LTE..sysobjects where id = object_id('TD_LTE..TempTable3'))
 drop table TD_LTE..TempTable3
 go
@@ -552,12 +551,12 @@ select convert(char(20),SSECTOR_ID),convert(char(20),NSECTOR_ID), convert(char(1
 EXEC master..xp_cmdshell 'BCP "SELECT  * FROM TD_LTE..temptable3" queryout "E:\sql-log\data\test3.txt" -c -q -S"DESKTOP-5M6JKFJ" -U"sa" -P"ly520741"'
 drop table TD_LTE..TempTable3*/
 
-/*--Ô¤ÀÀÇ°Ò»°ÙĞĞÊı¾İ
+/*--é¢„è§ˆå‰ä¸€ç™¾è¡Œæ•°æ®
 select top 100* from tbOptCell
 */
 
 
---Ö÷¼ü³åÍ»´¥·¢Æ÷ tbCell
+--ä¸»é”®å†²çªè§¦å‘å™¨ tbCell
 /*if exists (select * from sysobjects where name = 'tri_insert')
 drop trigger tri_insert
 go
@@ -577,7 +576,7 @@ close cur_new
 deallocate cur_new
 go
 
---tbKPIÖ÷¼ü³åÍ»´¥·¢Æ÷
+--tbKPIä¸»é”®å†²çªè§¦å‘å™¨
 if exists (select * from sysobjects where name = 'tri_KPI')
 drop trigger tri_KPI
 go
@@ -598,7 +597,7 @@ close cur_new
 deallocate cur_new
 go
 
---tbPRBÖ÷¼ü³åÍ»´¥·¢Æ÷
+--tbPRBä¸»é”®å†²çªè§¦å‘å™¨
 if exists (select * from sysobjects where name = 'tri_PRB')
 drop trigger tri_PRB
 go
@@ -620,43 +619,48 @@ deallocate cur_new
 go
 */
 
-/*3.3ĞÅÏ¢²éÑ¯
---1.Ğ¡ÇøÅäÖÃĞÅÏ¢²éÑ¯
+/*3.3ä¿¡æ¯æŸ¥è¯¢
+--1.å°åŒºé…ç½®ä¿¡æ¯æŸ¥è¯¢
 select SECTOR_ID from tbCell
 select distinct SECTOR_NAME from tbCell
 select * from tbCell where SECTOR_ID='111' or SECTOR_NAME='mmmm'
 
---2.»ùÕ¾eNodeBĞÅÏ¢²éÑ¯
+--2.åŸºç«™eNodeBä¿¡æ¯æŸ¥è¯¢
 select distinct ENODEBID from tbCell
 select distinct ENODEB_NAME from tbCell
 select* from tbCell where ENODEBID=1 or ENODEB_NAME='hhh'
 
---3.KPIÖ¸±êĞÅÏ¢²éÑ¯
+--3.KPIæŒ‡æ ‡ä¿¡æ¯æŸ¥è¯¢
 select distinct name from tbKPI
-select suc_time from tbKPI where startTime between 07/17/2016 and 07/19/2016 and name='ÈıÃÅÏ¿Á¬»ôÒåÂí¸ßËÙ¶«-HLHF'
---ÍøÔª¡¢ÊôĞÔ¡¢Ê±¼ä¶Î¿ÉÑ¡
+select suc_time from tbKPI where startTime between 07/17/2016 and 07/19/2016 and name='ä¸‰é—¨å³¡è¿éœä¹‰é©¬é«˜é€Ÿä¸œ-HLHF'
+--ç½‘å…ƒã€å±æ€§ã€æ—¶é—´æ®µå¯é€‰
 
---4.PRBĞÅÏ¢Í³¼ÆÓë²éÑ¯
---´æ´¢¹ı³ÌÉú³ÉtbPRBNew
+--4.PRBä¿¡æ¯ç»Ÿè®¡ä¸æŸ¥è¯¢
+--å­˜å‚¨è¿‡ç¨‹ç”ŸæˆtbPRBNew
 create proc create_PRBNew as 
 begin
 insert into tbPRBNew
-select substring(convert(varchar(13),starttime,20)+':00',1,16) ,sum(turnround)as turnaroud,name as name,cell,cell_name,avg(PRB0*1.0),avg(PRB1*1.0),avg(PRB2*1.0),avg(PRB3*1.0),avg(PRB4*1.0),avg(PRB5*1.0),avg(PRB6*1.0),avg(PRB7*1.0),avg(PRB8*1.0),avg(PRB9*1.0),avg(PRB10*1.0),avg(PRB11*1.0),avg(PRB12*1.0),avg(PRB13*1.0),avg(PRB14*1.0),avg(PRB15*1.0),avg(PRB16*1.0),avg(PRB17*1.0),avg(PRB18*1.0),avg(PRB19*1.0),avg(PRB20*1.0),avg(PRB21*1.0),avg(PRB22*1.0),avg(PRB23*1.0),avg(PRB24*1.0),avg(PRB25*1.0),avg(PRB26*1.0),avg(PRB27*1.0),avg(PRB28*1.0),avg(PRB29*1.0),avg(PRB30*1.0),avg(PRB31*1.0),avg(PRB32*1.0),
-avg(PRB33*1.0),avg(PRB34*1.0),avg(PRB35*1.0),avg(PRB36*1.0),avg(PRB37*1.0),avg(PRB38*1.0),avg(PRB39*1.0),avg(PRB40*1.0),avg(PRB41*1.0),avg(PRB42*1.0),avg(PRB43*1.0),avg(PRB44*1.0),avg(PRB45*1.0),avg(PRB46*1.0),avg(PRB47*1.0),avg(PRB48*1.0),avg(PRB49*1.0),avg(PRB50*1.0),avg(PRB51*1.0),avg(PRB52*1.0),avg(PRB53*1.0),avg(PRB54*1.0),avg(PRB55*1.0),avg(PRB56*1.0),avg(PRB57*1.0),avg(PRB58*1.0),avg(PRB59*1.0),avg(PRB60*1.0),avg(PRB61*1.0),avg(PRB62*1.0),avg(PRB63*1.0),avg(PRB64*1.0),avg(PRB65*1.0),avg(PRB66*1.0),avg(PRB67*1.0),avg(PRB68*1.0),avg(PRB69*1.0),avg(PRB70*1.0),avg(PRB71*1.0),avg(PRB72*1.0),avg(PRB73*1.0),avg(PRB74*1.0),avg(PRB75*1.0),avg(PRB76*1.0),avg(PRB77*1.0),avg(PRB78*1.0),avg(PRB79*1.0),avg(PRB80*1.0),avg(PRB81*1.0),avg(PRB82*1.0),avg(PRB83*1.0),avg(PRB84*1.0),avg(PRB85*1.0),avg(PRB86*1.0),avg(PRB87*1.0),avg(PRB88*1.0),avg(PRB89*1.0),avg(PRB90*1.0),avg(PRB91*1.0),avg(PRB92*1.0),avg(PRB93*1.0),avg(PRB94*1.0),avg(PRB95*1.0),avg(PRB96*1.0),
-avg(PRB97*1.0),avg(PRB98*1.0),avg(PRB99*1.0)
+select substring(convert(varchar(13),starttime,20)+':00',1,16) ,sum(turnround)as turnaroud,name as name,cell,cell_name,avg(PRB0*1.0),avg(PRB1*1.0),avg(PRB2*1.0),avg(PRB3*1.0),avg(PRB4*1.0),
+avg(PRB5*1.0),avg(PRB6*1.0),avg(PRB7*1.0),avg(PRB8*1.0),avg(PRB9*1.0),avg(PRB10*1.0),avg(PRB11*1.0),avg(PRB12*1.0),avg(PRB13*1.0),avg(PRB14*1.0),avg(PRB15*1.0),avg(PRB16*1.0),avg(PRB17*1.0),
+avg(PRB18*1.0),avg(PRB19*1.0),avg(PRB20*1.0),avg(PRB21*1.0),avg(PRB22*1.0),avg(PRB23*1.0),avg(PRB24*1.0),avg(PRB25*1.0),avg(PRB26*1.0),avg(PRB27*1.0),avg(PRB28*1.0),avg(PRB29*1.0),avg(PRB30*1.0),avg(PRB31*1.0),avg(PRB32*1.0),
+avg(PRB33*1.0),avg(PRB34*1.0),avg(PRB35*1.0),avg(PRB36*1.0),avg(PRB37*1.0),avg(PRB38*1.0),avg(PRB39*1.0),avg(PRB40*1.0),avg(PRB41*1.0),avg(PRB42*1.0),avg(PRB43*1.0),avg(PRB44*1.0),avg(PRB45*1.0),avg(PRB46*1.0),avg(PRB47*1.0),
+avg(PRB48*1.0),avg(PRB49*1.0),avg(PRB50*1.0),avg(PRB51*1.0),avg(PRB52*1.0),avg(PRB53*1.0),avg(PRB54*1.0),avg(PRB55*1.0),avg(PRB56*1.0),avg(PRB57*1.0),avg(PRB58*1.0),avg(PRB59*1.0),avg(PRB60*1.0),avg(PRB61*1.0),avg(PRB62*1.0),
+avg(PRB63*1.0),avg(PRB64*1.0),avg(PRB65*1.0),avg(PRB66*1.0),avg(PRB67*1.0),avg(PRB68*1.0),avg(PRB69*1.0),avg(PRB70*1.0),avg(PRB71*1.0),avg(PRB72*1.0),avg(PRB73*1.0),avg(PRB74*1.0),avg(PRB75*1.0),avg(PRB76*1.0),avg(PRB77*1.0),
+avg(PRB78*1.0),avg(PRB79*1.0),avg(PRB80*1.0),avg(PRB81*1.0),avg(PRB82*1.0),avg(PRB83*1.0),avg(PRB84*1.0),avg(PRB85*1.0),avg(PRB86*1.0),avg(PRB87*1.0),avg(PRB88*1.0),avg(PRB89*1.0),avg(PRB90*1.0),avg(PRB91*1.0),avg(PRB92*1.0),
+avg(PRB93*1.0),avg(PRB94*1.0),avg(PRB95*1.0),avg(PRB96*1.0),avg(PRB97*1.0),avg(PRB98*1.0),avg(PRB99*1.0)
 from tbPRB
 group by name ,cell,cell_name,substring(convert(varchar(13),starttime,20)+':00',1,16)
 end
  
---µ¼³öÍâ²¿excel
---µ¼³öÔ¤ÀÀ
+--å¯¼å‡ºå¤–éƒ¨excel
+--å¯¼å‡ºé¢„è§ˆ
  select top 100* from tbPRBNew
- --µ¼³ötbPRBNew
+ --å¯¼å‡ºtbPRBNew
  if exists(select * from TD_LTE..sysobjects where id = object_id('TD_LTE..TempTable'))
 drop table TD_LTE..TempTable
 go
 select * into TD_LTE..temptable from(
-select 'ÆğÊ¼Ê±¼ä'as [1],'ÖÜÆÚ' as [2],'ÍøÔªÃû³Æ' as [3],'Ğ¡Çø' as [4],'Ğ¡ÇøÃû' as [5],
+select 'èµ·å§‹æ—¶é—´'as [1],'å‘¨æœŸ' as [2],'ç½‘å…ƒåç§°' as [3],'å°åŒº' as [4],'å°åŒºå' as [5],
 'PRB0' as [6],'PRB1' as [7],'PRB2' as [8],'PRB3' as [9],'PRB4' as [10],'PRB5' as [11],'PRB6' as [12],'PRB7' as [13],
 'PRB8' as [14],'PRB9' as [15],'PRB10' as [16],'PRB11' as [17],'PRB12' as [18],'PRB13' as [19],'PRB14' as [20],'PRB15' as [21],
 'PRB16' as [22],'PRB17' as [23],'PRB18' as [24],'PRB19' as [25],'PRB20' as [26],'PRB21' as [27],'PRB22' as [28],'PRB23' as [29],
@@ -686,18 +690,18 @@ convert(nvarchar(50),PRB83),convert(nvarchar(50),PRB84),convert(nvarchar(50),PRB
 convert(nvarchar(50),PRB91),convert(nvarchar(50),PRB92),convert(nvarchar(50),PRB93),convert(nvarchar(50),PRB94),convert(nvarchar(50),PRB95),convert(nvarchar(50),PRB96),convert(nvarchar(50),PRB97),convert(nvarchar(50),PRB98),convert(nvarchar(50),PRB99)
 from tbPRBNew )as temptable
 EXEC master..xp_cmdshell 'BCP "SELECT  * FROM TD_LTE..temptable" queryout "E:\sql-log\data\test4.txt" -c -q -S"DESKTOP-5M6JKFJ" -U"sa" -P"ly520741"'
-drop table TD_LTE..TempTable  --É¾³ıÁÙÊ±±í
+drop table TD_LTE..TempTable  --åˆ é™¤ä¸´æ—¶è¡¨
 
 
---²éÑ¯ÍøÔªÄ³¸öÊ±¼ä¶Î£¨Ğ¡Ê±¼¶£©Ä³¸öÊôĞÔÖµµÄ±ä»¯Çé¿ö
+--æŸ¥è¯¢ç½‘å…ƒæŸä¸ªæ—¶é—´æ®µï¼ˆå°æ—¶çº§ï¼‰æŸä¸ªå±æ€§å€¼çš„å˜åŒ–æƒ…å†µ
 select *
 from tbPRBNew
-where startTime>='2016-07-17 00:00' and starttime <= '2016-07-17 04:00' and name='ÈıÃÅÏ¿Á¬»ôÒåÂí¸ßËÙ¶«-HLHF'
+where startTime>='2016-07-17 00:00' and starttime <= '2016-07-17 04:00' and name='ä¸‰é—¨å³¡è¿éœä¹‰é©¬é«˜é€Ÿä¸œ-HLHF'
 */
 
 /*
---3.4Ö÷ÁÚĞ¡ÇøC2I¸ÉÈÅ·ÖÎö
---ÏÈ²åÈëÇ°ËÄ¸öÊôĞÔ½øÈëtbC2INew
+--3.4ä¸»é‚»å°åŒºC2Iå¹²æ‰°åˆ†æ
+--å…ˆæ’å…¥å‰å››ä¸ªå±æ€§è¿›å…¥tbC2INew
 create proc create_C2INew as
 begin
 insert into tbC2INew(SCEll,NCELL,C2I_mean,std)
@@ -707,19 +711,19 @@ group by ServingSector,InterferingSector
 having count(ServingSector)>100
 end
 
---´«¸øºóÌ¨Ö÷´ÓĞ¡ÇøIDÒÔ¼°mean£¬std
+--ä¼ ç»™åå°ä¸»ä»å°åŒºIDä»¥åŠmeanï¼Œstd
 select ServingSector,InterferingSector,avg((LteScRSRP-LteNcRSRP)*1.000) C2I_mean,round(stdev(LteScRSRP-LteNcRSRP),6)  std
 from tbMROData
 group by ServingSector,InterferingSector
 having count(ServingSector)>100
---ºóÌ¨µÄÖµ´«»ØÀ´¸üĞÂtbC2INewºóÁ½¸öÊôĞÔ
+--åå°çš„å€¼ä¼ å›æ¥æ›´æ–°tbC2INewåä¸¤ä¸ªå±æ€§
 update tbC2INew set PrbC2I9=0.0001,PrbABS6=9.9 where SCELL='xxx' and NCELL='yyyy'
 
 
---Ô¤ÀÀtbC2INewÇ°100ĞĞ
+--é¢„è§ˆtbC2INewå‰100è¡Œ
 select top 100* from tbC2INew
 
---µ¼³ötbC2INew
+--å¯¼å‡ºtbC2INew
 if exists(select * from TD_LTE..sysobjects where id = object_id('TD_LTE..TempTable'))
 drop table TD_LTE..TempTable
 go
@@ -732,8 +736,8 @@ drop table TD_LTE..TempTable
 */
 -----------------
 /*
---3.5²éÑ¯ÖØµş¸²¸Ç¸ÉÈÅÈıÔª×é
---Éú³ÉtbC2I3 £¬x¿ÉÑ¡
+--3.5æŸ¥è¯¢é‡å è¦†ç›–å¹²æ‰°ä¸‰å…ƒç»„
+--ç”ŸæˆtbC2I3 ï¼Œxå¯é€‰
 insert into tbC2I3
 select  S.SCELL as S_SCELL,R.SCELL as R_SCELL,T.SCELL as T_SCELL
 from tbC2INew as T,tbC2INew as S,tbC2INew as R
@@ -741,7 +745,7 @@ where T.SCELL=S.NCELL and R.NCELL=S.SCELL and R.Scell=T.Ncell
 and T.PrbABS6>=0.7 and R.PrbABS6>=0.7 and S.PrbABS6>=0.7
 
 
---É¾³ıÖØ¸´ÈıÔª×é´¥·¢Æ÷
+--åˆ é™¤é‡å¤ä¸‰å…ƒç»„è§¦å‘å™¨
 if exists (select * from sysobjects where name = 'tri_C2I3')
 drop trigger tri_C2I3
 go
@@ -768,7 +772,7 @@ close cur_new
 deallocate cur_new
 go
 
---µ¼³ötbC2I3
+--å¯¼å‡ºtbC2I3
 if exists(select * from TD_LTE..sysobjects where id = object_id('TD_LTE..TempTable'))
 drop table TD_LTE..TempTable
 go
@@ -777,10 +781,10 @@ select 'A_SECTOR_ID'as [1],'B_SECTOR_ID' as [2],'B_SECTOR_ID' as [3]
 union all
 select convert(char(20),A_SECTOR_ID),convert(char(20),B_SECTOR_ID),convert(char(20),C_SECTOR_ID)  from tbC2I3 )as temptable
 EXEC master..xp_cmdshell 'BCP "SELECT  * FROM TD_LTE..temptable" queryout "E:\sql-log\data\test6.txt" -c -q -S"DESKTOP-5M6JKFJ" -U"sa" -P"ly520741"'
-drop table TD_LTE..TempTable  --É¾³ıÁÙÊ±±í
+drop table TD_LTE..TempTable  --åˆ é™¤ä¸´æ—¶è¡¨
 */
 
---Ë÷ÒıĞÔÄÜ±È½Ï
+--ç´¢å¼•æ€§èƒ½æ¯”è¾ƒ
 ---tbAdjCell
 /*create index IND_AdjCell on tbAdjCell(S_EARFCN)
 create table tbAdjCellNew select* from tbAdjCell
